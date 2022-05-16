@@ -88,7 +88,6 @@ SET FOREIGN_KEY_CHECKS=0; -- to disable them
 SET FOREIGN_KEY_CHECKS=1; -- to re-enable them
 alter table class add Class_name varchar(100) not null default 'ECONOMY';
 ALTER TABLE class modify column CLASS_ID INT PRIMARY KEY AUTO_INCREMENT first;
-alter table class auto_increment = 200;
 insert into class(NO_OF_SEAT,Class_name,train_TRAIN_ID,train_STATION_STATION_ID)
 values 
 (50,'BUSINESS',200,200),
@@ -140,48 +139,47 @@ alter table ticket auto_increment = 200;
 insert into ticket (SOURCE,DESTINATION,CLASS_CLASS_ID,train_TRAIN_ID,train_STATION_STATION_ID,passenger_p_id)
 values 
 -- ("Makkah","Riyadh",1,200,200,108),
--- ("Makkah","Dammam",2,200,200,109),
-("Makkah","Qassim",3,200,200,110),
-("Makkah","Yanbu",4,201,200,111),
-("Makkah","Jeddah",5,201,200,112),
-("Makkah","Buraidh",6,201,200,113),
-("Makkah","Jordan",7,202,200,114),
-("Makkah","Qatar",8,202,200,115),
-("Makkah","Jubail",9,202,200,116),
-("Jeddah","Riyadh",10,203,201,117),
-("Jeddah","Dammam",11,203,201,118),
-("Jeddah","Qassim",12,203,201,119),
-("Jeddah","Makkah",13,204,201,120),
-("Jeddah","Buraidh",14,204,201,121),
-("Jeddah","Jordan",15,204,201,122),
-("Jeddah","Qatar",16,205,202,123),
-("Jeddah","Jubail",17,205,202,124),
-("Dammam","Riyadh",18,205,202,125),
-("Dammam","Jeddah",19,206,202,126),
-("Dammam","Qassim",20,206,202,127),
-("Dammam","Makkah",21,206,202,128),
-("Dammam","Buraidh",22,207,202,129),
-("Madinah","Jordan",23,207,202,130),
-("Madinah","Qatar",24,207,202,131),
-("Madinah","Jubail",25,208,203,132),
-("Riyadh","Makkah",26,208,203,133),
-("Riyadh","Jeddah",27,208,203,134),
-("Riyadh","Madinah",28,209,203,135),
-("Jeddah","Jordan",29,209,203,136),
-("Jeddah","Qatar",30,209,203,137),
-("Jeddah","Jubail",31,210,203,138),
-("Dammam","Riyadh",32,210,203,139),
-("Dammam","Jeddah",33,210,203,140),
-("Dammam","Qassim",34,211,204,141),
-("Dammam","Makkah",35,211,204,142),
-("Dammam","Buraidh",36,211,204,143),
-("Madinah","Jordan",37,212,204,144),
-("Madinah","Qatar",38,212,204,145),
-("Madinah","Jubail",39,212,204,146),
-("Riyadh","Makkah",40,213,204,147),
-("Riyadh","Jeddah",41,213,204,148),
-("Riyadh","Madinah",42,213,204,149),
-("Riyadh","Jeddah",41,213,204,150);
+("Makkah","Dammam",2,200,200,109),
+("Makkah","Qassim",3,200,200),
+("Makkah","Yanbu",4,201,200),
+("Makkah","Jeddah",5,201,200),
+("Makkah","Buraidh",6,201,200),
+("Makkah","Jordan",7,202,200),
+("Makkah","Qatar",8,202,200),
+("Makkah","Jubail",9,202,200),
+("Jeddah","Riyadh",10,203,201),
+("Jeddah","Dammam",11,203,201),
+("Jeddah","Qassim",12,203,201),
+("Jeddah","Makkah",13,204,201),
+("Jeddah","Buraidh",14,204,201),
+("Jeddah","Jordan",15,204,201),
+("Jeddah","Qatar",16,205,202),
+("Jeddah","Jubail",17,205,202),
+("Dammam","Riyadh",18,205,202),
+("Dammam","Jeddah",19,206,202),
+("Dammam","Qassim",20,206,202),
+("Dammam","Makkah",21,206,202),
+("Dammam","Buraidh",22,207,202),
+("Madinah","Jordan",23,207,202),
+("Madinah","Qatar",24,207,202),
+("Madinah","Jubail",25,208,203),
+("Riyadh","Makkah",26,208,203),
+("Riyadh","Jeddah",27,208,203),
+("Riyadh","Madinah",28,209,203),
+("Jeddah","Jordan",29,209,203),
+("Jeddah","Qatar",30,209,203),
+("Jeddah","Jubail",31,210,203),
+("Dammam","Riyadh",32,210,203),
+("Dammam","Jeddah",33,210,203),
+("Dammam","Qassim",34,211,204),
+("Dammam","Makkah",35,211,204),
+("Dammam","Buraidh",36,211,204),
+("Madinah","Jordan",37,212,204),
+("Madinah","Qatar",38,212,204),
+("Madinah","Jubail",39,212,204),
+("Riyadh","Makkah",40,213,204),
+("Riyadh","Jeddah",41,213,204),
+("Riyadh","Madinah",42,213,204);
 
 insert into time (MOV_TIME,REF_NO,ARR_TIME,STATION_STATION_ID,TRAIN_TRAIN_ID)
 values
@@ -227,7 +225,7 @@ from class inner join train on class.TRAIN_TRAIN_ID = train.TRAIN_ID;
 
 
 
-select employee.E_FNAME as 'EMP_Name',employee.PH_NUMBER as 'PH_Number' , employee.GENDER as 'E_Gender', P_NAME as 'Passenger_name'
+select employee.E_FNAME as 'EMP_Name',employee.PH_NUMBER as 'PH_Number' , employee.GENDER as 'E_Gender', P_NAME as 'Passenger_name',passenger.PH_NUMBER as 'PassengerPH'
 from employee join passenger on employee.E_id = passenger.Employee_E_id;
 
 
